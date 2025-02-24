@@ -4,6 +4,7 @@ import Table from "@/components/Table"
 import TableSearch from "@/components/TableSearch"
 import prisma from "@/lib/prisma"
 import { ITEM_PER_PAGE } from "@/lib/setttings"
+import { formatDateToLocal } from "@/lib/utils"
 import { auth } from "@clerk/nextjs/server"
 import { Class, Exam, Prisma, Subject, Teacher } from "@prisma/client"
 import Image from "next/image"
@@ -23,7 +24,7 @@ const ExamListsPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
 
-  const {userId, sessionClaims } = await auth();
+  const { userId, sessionClaims } = await auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
   const currentUserId = userId;
 
@@ -43,7 +44,12 @@ const ExamListsPage = async ({
       className: "hidden md:table-cell",
     },
     {
-      header: "Tanggal",
+      header: "Mulai",
+      accessor: "date",
+      className: "hidden md:table-cell",
+    },
+    {
+      header: "Berakhir",
       accessor: "date",
       className: "hidden md:table-cell",
     },
@@ -51,23 +57,27 @@ const ExamListsPage = async ({
       header: "Aksi",
       accessor: "action",
     }] : [])
-  
+
   ]
-  
-  
-  
+
+
+
   const renderRow = (item: ExamList) => (
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
       <td className="flex items-center gap-4 p-4"> {item.lesson.subject.name}</td>
       <td>{item.lesson.class.name}</td>
       <td className="hidden md:table-cell hover:underline">{item.lesson.teacher.name + " " + item.lesson.teacher.surname}</td>
-  
+
       <td className="hidden md:table-cell hover:underline">
-        {new Intl.DateTimeFormat("id-ID").format(item.startTime)}
+        {/* {new Intl.DateTimeFormat("id-ID").format(item.startTime)} */}
+        {formatDateToLocal(item.startTime)}
+      </td>
+      <td>
+        {formatDateToLocal(item.endTime)}
       </td>
       <td>
         <div className="flex items-center gap-2">
-  
+
           {(role === "admin" || role === "teacher") && (
             <>
               <FormContainer table="exam" type="update" data={item} />

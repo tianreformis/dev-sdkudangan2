@@ -6,7 +6,13 @@ import EventCalendarContainer from "@/components/EventCalendarContainer"
 import FinanceChart from "@/components/FinanceChart"
 import UserCard from "@/components/UserCard"
 
-const Admin = ({ searchParams }: { searchParams: { [key: string]: string | undefined }}) => {
+
+
+
+
+
+const Admin =  ({ searchParams }: { searchParams: { [key: string]: string | undefined }}) => {
+
   return (
     <div className='p-4 flex gap-4 flex-col md:flex-row'>
       {/* Left */}
@@ -34,7 +40,10 @@ const Admin = ({ searchParams }: { searchParams: { [key: string]: string | undef
           </div >
           {/* BottomChart */}
           <div className="w-full h-[500px] my-4">
-            <FinanceChart />
+            {/* <FinanceChart /> */}
+            {/* <LastUserLogin /> */}
+            
+
 
           </div>
         </div>
