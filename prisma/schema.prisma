@@ -121,6 +121,8 @@ model Exam {
   startTime DateTime
   endTime   DateTime
 
+  examLink String?
+
   lessonId Int
   lesson   Lesson   @relation(fields: [lessonId], references: [id])
   results  Result[]

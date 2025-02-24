@@ -108,6 +108,14 @@ const ExamForm = ({
           error={errors?.endTime}
           type="datetime-local"
         />
+        <InputField
+          label="Link UJian"
+          name="examLink"
+          defaultValue={data?.examLink}
+          register={register}
+          error={errors?.examLink}
+          type="text"
+        />
         {data && (
           <InputField
             label="Id"

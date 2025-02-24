@@ -391,6 +391,7 @@ export const createExam = async (
         startTime: data.startTime,
         endTime: data.endTime,
         lessonId: data.lessonId,
+        examLink : data.examLink,
       },
     });
 
@@ -432,6 +433,7 @@ export const updateExam = async (
         startTime: data.startTime,
         endTime: data.endTime,
         lessonId: data.lessonId,
+        examLink : data.examLink,
       },
     });
 

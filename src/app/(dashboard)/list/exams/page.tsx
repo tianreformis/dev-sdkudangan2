@@ -8,6 +8,7 @@ import { formatDateToLocal } from "@/lib/utils"
 import { auth } from "@clerk/nextjs/server"
 import { Class, Exam, Prisma, Subject, Teacher } from "@prisma/client"
 import Image from "next/image"
+import Link from "next/link"
 
 type ExamList = Exam & {
   lesson: {
@@ -33,6 +34,10 @@ const ExamListsPage = async ({
     {
       header: "Mata Pelajaran",
       accessor: "subject",
+    },
+    {
+      header: "Link Ujian",
+      accessor: "examLink",
     },
     {
       header: "Kelas",
@@ -65,10 +70,13 @@ const ExamListsPage = async ({
   const renderRow = (item: ExamList) => (
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
       <td className="flex items-center gap-4 p-4"> {item.lesson.subject.name}</td>
+      <td>
+        <Link href={item.examLink || "#"} className="hover:text-blue-500">{item.examLink === null ? "-" : "Ujian"}</Link>
+        </td>
       <td>{item.lesson.class.name}</td>
-      <td className="hidden md:table-cell hover:underline">{item.lesson.teacher.name + " " + item.lesson.teacher.surname}</td>
+      <td className="hidden md:table-cell">{item.lesson.teacher.name + " " + item.lesson.teacher.surname}</td>
 
-      <td className="hidden md:table-cell hover:underline">
+      <td className="hidden md:table-cell">
         {/* {new Intl.DateTimeFormat("id-ID").format(item.startTime)} */}
         {formatDateToLocal(item.startTime)}
       </td>
@@ -173,7 +181,7 @@ const ExamListsPage = async ({
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* Top */}
       <div className="flex items-center justify-between">
-        <h1 className="hidden md:block text-lg font-semibold">Semua Ulangan (Exam)</h1>
+        <h1 className="hidden md:block text-lg font-semibold">Semua Ulangan (PTS/PAS/Ulangan Harian)</h1>
         <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
