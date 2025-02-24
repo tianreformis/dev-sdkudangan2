@@ -45,10 +45,14 @@ const ParentForm = dynamic(() => import("./Forms/ParentForm"), {
 const LessonForm = dynamic(() => import("./Forms/LessonForm"), {
   loading: () => <h1>loading...</h1>,
 });
+const EventForm = dynamic(() => import("./Forms/EventForm"),{
+  loading: () => <h1>loading...</h1>,
+});
+
 const AnnouncementForm = dynamic(() => import("./Forms/AnnouncementForm"));
 const AssginmentForm = dynamic(() => import("./Forms/AssignmentForm"));
 const AttendaceForm = dynamic(() => import("./Forms/AtterndanceForm"));
-const EventForm = dynamic(() => import("./Forms/EventForm"));
+
 
 const ResultForm = dynamic(() => import("./Forms/ResultForm"));
 
@@ -69,7 +73,7 @@ const forms: {
   assignment: (setOpen, type, data) => <AssginmentForm type={type} data={data} />,
   attendace: (setOpen, type, data) => <AttendaceForm type={type} data={data} />,
 
-  event: (setOpen, type, data) => <EventForm type={type} data={data} />,
+
 
 
   // result: (setOpen, type, data) => <ResultForm type={type} data={data} relatedData={relatedData} />,
@@ -128,6 +132,14 @@ const forms: {
       data={data}
       setOpen={setOpen}
       relatedData={relatedData}
+    />,
+
+    event: (setOpen, type, data,relatedData) => 
+    <EventForm 
+    type={type} 
+    data={data} 
+    setOpen={setOpen} 
+    relatedData={relatedData} 
     />,
   //...more form components for other tables...
 }
