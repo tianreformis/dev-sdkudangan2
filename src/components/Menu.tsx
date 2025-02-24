@@ -160,16 +160,7 @@ const Menu = async () => {
 
         </div>
       ))}
-
-      <SignOutButton redirectUrl="/">
-        <div className="flex flex-col gap-2">
-        <button className=" flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 md:px-2 rounded-md hover:bg-lamaSkyLight       ">
-          <LogoutSquare02Icon size={24} color="#333" />
-          <span className="hidden lg:block">Keluar</span>
-        </button>
-        </div>
-        
-      </SignOutButton>
+      
     </div>
   );
 };
