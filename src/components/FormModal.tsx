@@ -37,7 +37,7 @@ const ClassForm = dynamic(() => import("./Forms/ClassForm"), {
   loading: () => <h1>loading...</h1>,
 });
 const ExamForm = dynamic(() => import("./Forms/ExamForm"), {
-  loading: () => <h1>loading...</h1>,
+  loading: () => <h1>Loading...</h1>,
 });
 const ParentForm = dynamic(() => import("./Forms/ParentForm"), {
   loading: () => <h1>loading...</h1>,
@@ -103,13 +103,17 @@ const forms: {
       setOpen={setOpen}
       relatedData={relatedData}
     />,
-  exam: (setOpen, type, data, relatedData) =>
+
+  exam: (setOpen, type, data, relatedData) => (
     <ExamForm
       type={type}
       data={data}
       setOpen={setOpen}
       relatedData={relatedData}
-    />,
+    />
+    // TODO OTHER LIST ITEMS
+  ),
+
   parent: (setOpen, type, data, relatedData) =>
     <ParentForm
       type={type}

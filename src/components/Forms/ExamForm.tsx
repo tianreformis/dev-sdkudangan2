@@ -64,6 +64,18 @@ const ExamForm = ({
     }
   }, [state, router, type, setOpen]);
 
+  const formatDateToLocal = (date : Date) => {
+    if (!date) return "";
+    const localDate = new Date(date);
+    const year = localDate.getFullYear();
+    const month = String(localDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(localDate.getDate()).padStart(2, '0');
+    const hours = String(localDate.getHours()).padStart(2, '0');
+    const minutes = String(localDate.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
   const { lessons } = relatedData;
 
   return (
@@ -83,7 +95,7 @@ const ExamForm = ({
         <InputField
           label="Start Date"
           name="startTime"
-          defaultValue={data?.startTime}
+          defaultValue={formatDateToLocal(data?.startTime)}
           register={register}
           error={errors?.startTime}
           type="datetime-local"
@@ -91,7 +103,7 @@ const ExamForm = ({
         <InputField
           label="End Date"
           name="endTime"
-          defaultValue={data?.endTime}
+          defaultValue={formatDateToLocal(data?.endTime)}
           register={register}
           error={errors?.endTime}
           type="datetime-local"

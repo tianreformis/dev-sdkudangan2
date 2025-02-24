@@ -63,7 +63,7 @@ const ExamListsPage = async ({
       <td className="hidden md:table-cell hover:underline">{item.lesson.teacher.name + " " + item.lesson.teacher.surname}</td>
   
       <td className="hidden md:table-cell hover:underline">
-        {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+        {new Intl.DateTimeFormat("id-ID").format(item.startTime)}
       </td>
       <td>
         <div className="flex items-center gap-2">

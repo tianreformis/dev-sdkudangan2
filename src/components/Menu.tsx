@@ -31,7 +31,7 @@ const menuItems = [
       },
       {
         icon: <UserIcon size={24} color="#333" />,
-        label: "Orang Tua",
+        label: "Daftar Orang Tua",
         href: "/list/parents",
         visible: ["admin", "teacher"],
       },
@@ -49,7 +49,7 @@ const menuItems = [
       },
       {
         icon: <TeachingIcon size={24} color="#333" />,
-        label: "Lessons",
+        label: "Pembelajaran",
         href: "/list/lessons",
         visible: ["admin", "teacher"],
       },

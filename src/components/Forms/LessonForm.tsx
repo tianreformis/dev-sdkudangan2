@@ -31,7 +31,7 @@ const LessonFormPage = ({
   const {
     register,
     handleSubmit,
-    watch, 
+    watch,
     setValue,
     formState: { errors },
   } = useForm<LessonSchema>({
@@ -63,27 +63,28 @@ const LessonFormPage = ({
     }
   }, [state, router, type, setOpen]);
 
-  const startTime = watch ("startTime");
-    useEffect(() => {
-      if (startTime) {
-        const date = new Date(startTime);  
-        const daysMap: Record<number, "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"> = {
-          0: "SUNDAY",
-          1: "MONDAY",
-          2: "TUESDAY",
-          3: "WEDNESDAY",
-          4: "THURSDAY",
-          5: "FRIDAY",
-          6: "SATURDAY",
-        };  
-        const selectedDay = daysMap[date.getDay()]; // 
-        if (selectedDay !== "SUNDAY") {
-          setValue("day", selectedDay); // 
-        }
+  const startTime = watch("startTime");
+  useEffect(() => {
+    if (startTime) {
+      const date = new Date(startTime);
+      const daysMap: Record<number, "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"> = {
+        0: "SUNDAY",
+        1: "MONDAY",
+        2: "TUESDAY",
+        3: "WEDNESDAY",
+        4: "THURSDAY",
+        5: "FRIDAY",
+        6: "SATURDAY",
+      };
+      const selectedDay = daysMap[date.getDay()]; // 
+      if (selectedDay !== "SUNDAY") {
+        setValue("day", selectedDay); // 
       }
-    }, [startTime, setValue]);
+    }
 
-  const formatDateToLocal = ({date} : {date:Date}) => {
+  }, [startTime, setValue]);
+
+  const formatDateToLocal = ({ date }: { date: Date }) => {
     if (!date) return "";
     const localDate = new Date(date);
     const year = localDate.getFullYear();
@@ -91,11 +92,12 @@ const LessonFormPage = ({
     const day = String(localDate.getDate()).padStart(2, '0');
     const hours = String(localDate.getHours()).padStart(2, '0');
     const minutes = String(localDate.getMinutes()).padStart(2, '0');
-    
+
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
-  const { classes,subjects,teachers } = relatedData;
+
+  const { classes, subjects, teachers } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -124,7 +126,7 @@ const LessonFormPage = ({
             <option value="THURSDAY">Kamis</option>
             <option value="FRIDAY">Jumat</option>
             <option value="SATURDAY">Sabtu</option>
-            
+
           </select>
           {errors.day?.message && (
             <p className="text-xs text-red-400">
@@ -135,7 +137,7 @@ const LessonFormPage = ({
         <InputField
           label="Waktu Mulai"
           name="startTime"
-          defaultValue={formatDateToLocal({date: data?.startTime})}
+          defaultValue={formatDateToLocal({ date: data?.startTime })}
           register={register}
           error={errors?.startTime}
           type="datetime-local"
@@ -143,12 +145,12 @@ const LessonFormPage = ({
         <InputField
           label="Waktu Selesai"
           name="endTime"
-          defaultValue={formatDateToLocal({date: data?.endTime})}
+          defaultValue={formatDateToLocal({ date: data?.endTime })}
           register={register}
           error={errors?.endTime}
           type="datetime-local"
         />
-        
+
         {data && (
           <InputField
             label="Id"
@@ -217,7 +219,7 @@ const LessonFormPage = ({
             defaultValue={data?.classId}
           >
             {classes.map(
-              (classSub: { id: string; name: string;}) => (
+              (classSub: { id: string; name: string; }) => (
                 <option
                   value={classSub.id}
                   key={classSub.id}
@@ -234,14 +236,14 @@ const LessonFormPage = ({
             </p>
           )}
         </div>
-       
+
       </div>
       {state.error && (
         <span className="text-red-500">Ada yang salah!</span>
       )}
       <button className="bg-blue-400 rounded-md py-2 text-white hover:bg-blue-300">
-      {type === "create" ? "Create" : "Update"}
-    </button>
+        {type === "create" ? "Create" : "Update"}
+      </button>
     </form>
   );
 };

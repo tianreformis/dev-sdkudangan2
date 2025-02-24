@@ -58,6 +58,7 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         });
         relatedData = { classes: studentClasses, grades: studentGrades };
         break;
+
       case "exam":
         const examLessons = await prisma.lesson.findMany({
           where: {
@@ -67,6 +68,7 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         });
         relatedData = { lessons: examLessons };
         break;
+
       case "parent":
         const parentStudents = await prisma.student.findMany({
           select: { id: true, name: true, surname: true },
@@ -75,17 +77,17 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         break;
       case "lesson":
         const lessonClass = await prisma.class.findMany({
-          select: { id: true, name: true},
+          select: { id: true, name: true },
         });
         const lessonSubject = await prisma.subject.findMany({
-          select: { id: true, name: true },              
+          select: { id: true, name: true },
         });
         const lessonTeacher = await prisma.teacher.findMany({
           select: { id: true, name: true, surname: true },
-        
-          
-        });                  
-        relatedData = { classes: lessonClass, subjects : lessonSubject, teachers: lessonTeacher };
+
+
+        });
+        relatedData = { classes: lessonClass, subjects: lessonSubject, teachers: lessonTeacher };
         break;
 
       default:
