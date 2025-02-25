@@ -28,8 +28,8 @@ const Announcements = async () => {
   return (
     <div className="bg-white rounded-md p-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Announcements</h1>
-        <Link href={"/list/announcements"}>View All</Link>
+        <h1 className="text-xl font-semibold">Pengumuman</h1>
+        <Link href={"/list/announcements"} className="bg-lamaSky rounded-full px-2 py-1">Lihat</Link>
 
       </div>
       <div className="flex flex-col gap-4 mt-4">

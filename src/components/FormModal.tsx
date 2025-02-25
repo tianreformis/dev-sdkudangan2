@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useFormState } from "react-dom";
-import { deleteClass, deleteEvent, deleteExam, deleteLesson, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
+import { deleteAnnouncement, deleteClass, deleteEvent, deleteExam, deleteLesson, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
@@ -21,7 +21,7 @@ const deleteActionMap = {
   student: deleteStudent,
   parent: deleteParent,
   teacher: deleteTeacher,
-  announcement: deleteSubject,
+  announcement: deleteAnnouncement,
 }
 
 const TeacherForm = dynamic(() => import("./Forms/TeacherForm"), {
@@ -49,7 +49,9 @@ const EventForm = dynamic(() => import("./Forms/EventForm"), {
   loading: () => <h1>loading...</h1>,
 });
 
-const AnnouncementForm = dynamic(() => import("./Forms/AnnouncementForm"));
+const AnnouncementForm = dynamic(() => import("./Forms/AnnouncementForm"), {
+  loading: () => <h1>loading...</h1>,
+});
 const AssginmentForm = dynamic(() => import("./Forms/AssignmentForm"));
 const AttendaceForm = dynamic(() => import("./Forms/AtterndanceForm"));
 
@@ -68,8 +70,6 @@ const forms: {
   ) => JSX.Element;
 } = {
 
-
-  announcement: (setOpen, type, data) => <AnnouncementForm type={type} data={data} />,
   assignment: (setOpen, type, data) => <AssginmentForm type={type} data={data} />,
   attendace: (setOpen, type, data) => <AttendaceForm type={type} data={data} />,
 
@@ -115,6 +115,8 @@ const forms: {
       setOpen={setOpen}
       relatedData={relatedData}
     />
+
+
     // TODO OTHER LIST ITEMS
   ),
 
@@ -140,6 +142,14 @@ const forms: {
       data={data}
       setOpen={setOpen}
       relatedData={relatedData}
+    />,
+  announcement: (setOpen, type, data, relatedData) =>
+    <AnnouncementForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+
     />,
   //...more form components for other tables...
 }

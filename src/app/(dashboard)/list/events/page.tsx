@@ -46,11 +46,11 @@ const EventListPage = async ({
     },
     ...(role === "admin"
       ? [
-          {
-            header: "Actions",
-            accessor: "action",
-          },
-        ]
+        {
+          header: "Actions",
+          accessor: "action",
+        },
+      ]
       : []),
   ];
 
@@ -121,7 +121,7 @@ const EventListPage = async ({
     parent: { students: { some: { parentId: currentUserId! } } },
   };
   if (role === "admin") {
-const query = {};
+    const query = {};
   } else {
     query.OR = [
       { classId: null },
@@ -131,7 +131,7 @@ const query = {};
     ];
   }
 
-  
+
 
   const [data, count] = await prisma.$transaction([
     prisma.event.findMany({

@@ -1,3 +1,4 @@
+import FormContainer from "@/components/FormContainer"
 import FormModal from "@/components/FormModal"
 import Pagination from "@/components/Pagination"
 import Table from "@/components/Table"
@@ -21,9 +22,9 @@ const AnnouncementListPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
 
-  const {userId, sessionClaims } = await auth();
-    const role = (sessionClaims?.metadata as { role?: string })?.role;
-    const currentUserId = userId;
+  const { userId, sessionClaims } = await auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
+  const currentUserId = userId;
 
   const columns = [
     {
@@ -43,9 +44,9 @@ const AnnouncementListPage = async ({
       header: "Aksi",
       accessor: "action",
     }] : []),
-  
+
   ];
-  
+
   const renderRow = (item: AnnouncementList) => (
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
       <td className="flex items-center gap-4 p-4">
@@ -62,8 +63,8 @@ const AnnouncementListPage = async ({
         <div className="flex items-center gap-2">
           {role === "admin" && (
             <>
-              <FormModal table="announcement" type="update" data={item} />
-              <FormModal table="announcement" type="delete" id={item.id} />
+              <FormContainer table="announcement" type="update" data={item} />
+              <FormContainer table="announcement" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -98,12 +99,16 @@ const AnnouncementListPage = async ({
     parent: { students: { some: { parentId: currentUserId! } } },
   };
 
-  query.OR = [
-    { classId: null },
-    {
-      class: roleConditions[role as keyof typeof roleConditions] || {},
-    }
-  ]
+  if (role === "admin") {
+    const query = {};
+  } else {
+    query.OR = [
+      { classId: null },
+      {
+        class: roleConditions[role as keyof typeof roleConditions] || {},
+      },
+    ];
+  }
 
   const [data, count] = await prisma.$transaction([
     prisma.announcement.findMany({
@@ -132,7 +137,7 @@ const AnnouncementListPage = async ({
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && (
-              <FormModal table="announcement" type="create" />
+              <FormContainer table="announcement" type="create" />
             )}
           </div>
         </div>
