@@ -1,14 +1,59 @@
-studenttest2
-studenttest123_
+Login baris pertama username
+Login Baris kedua password
+Login Sebagai Admin 
+admin 
+admin
 
+Login Sebagai Guru
+pelias (username)
+Kudangan123_ (password)
 
-
-
-pelias
-Kudangan123_
-
+Login Sebagai Murid
 androshalom
 Kudangan123_
 
+Login Sebagai Orang Tua
 supardiyanto
 Kudangan123_
+
+Keterangan 
+Admin dapat mendaftarkan, menghapus, mengedit data murid 
+Admin dapat mendaftarkan, menghapus, mengedit data Guru
+Admin dapat mendaftarkan, menghapus, mengedit data Orang Tua
+Admin dapat mendaftarkan, menghapus, mengedit data Mapel
+Admin dapat mendaftarkan, menghapus, mengedit data Kelas
+Admin dapat mendaftarkan, menghapus, mengedit Pembelajaran
+Admin dapat mendaftarkan, menghapus, mengedit Ulangan (Semua guru)
+Admin dapat mendaftarkan, menghapus, mengedit Tugas Harian (Semua guru)
+Admin dapat mendaftarkan, menghapus, mengedit Acara
+Admin dapat mendaftarkan, menghapus, mengedit Pengumuman
+Admin dapat mendaftarkan, menghapus, Profilnya sendiri
+
+Guru 
+Guru dapat mendaftarkan, menghapus, mengedit Ulangan, dan Tugas Harian miliknya sendiri berdasarkan Pembelajaran yang sudah dibuat admin
+Guru dapat melihat semua Kelas
+Guru dapat melihat semua Mapel
+Guru dapat melihat semua Pembelajaran
+Guru dapat melihat semua Acara
+Guru dapat melihat semua Pengumuman
+Guru dapat melihat dan mengganti Profilnya sendiri
+guru dapat melihat jadwal pembelajaran miliknya sendiri 
+
+Murid 
+Murid dapat melihat jadwla kelasnya
+murid dapat meliaht ualngan dan penialian harian kelasnya
+murid dapat melihat pengumuman kelasnya
+murid dapat melihat acara semuanya dan acara kelasnya
+murid dapat melihat dan mengganti profilnya sendiri
+
+Orang Tua
+Orang tua dapat melihat jadwal semua anaknya
+Orang tua dapat melihat tugas anaknya
+orang tua dapat melihat acara yang diadakan di (kelas anakNya)
+orang tua dapat melihat pengumuman yang diadakan di (kelas anakNya)
+orang tua dapat melihat profil sendiri dan menggantinya jika diperlukan
+
+
+
+Kiranya menolong supaya sistem ini memudahkan admin, guru, orang tua dan murid
+berharap kedepannya tidak ada orang tua, murid ataupun guru yang ketinggalan informasi
