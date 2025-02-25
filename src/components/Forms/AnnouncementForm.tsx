@@ -86,16 +86,16 @@ const AnnouncementForm = ({
 
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
-          label="Nama Acara"
+          label="Nama Pengumuman"
           name="title"
           defaultValue={data?.title}
           register={register}
           error={errors?.title}
         />
         <InputField
-          label="Mulai"
+          label="Tanggal"
           name="date"
-          defaultValue={formatDateToLocal(data?.date)}
+          defaultValue={data?.date.toISOString().split("T")[0]}
           register={register}
           error={errors?.date}
           type="date"
@@ -124,8 +124,9 @@ const AnnouncementForm = ({
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("classId")}
-            defaultValue={data?.classes}
+            defaultValue={data?.classId === null || data?.classId === "" ? null : data?.classId}
           >
+            <option value={""}>umum</option>
             {classes.map((classId: { id: number; name: string }) => (
               <option value={classId.id} key={classId.id}>
                 {classId.name}

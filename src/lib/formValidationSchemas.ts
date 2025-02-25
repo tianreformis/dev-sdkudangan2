@@ -152,7 +152,7 @@ export const announcementSchema = z.object({
   title: z.string().min(3, { message: "Nama Acara minimal 3 karakter" }),
   description : z.string().min(3, { message: "Deskripsi minimal 3 karakter" }),
   date :z.coerce.date(),  
-  classId: z.coerce.number().min(1, { message: "Class is required!" }).optional(),//will store obj,
+  classId: z.coerce.number().nullable().optional(),//will store obj,
 
 });
 export type AnnouncementSchema = z.infer<typeof announcementSchema>;
