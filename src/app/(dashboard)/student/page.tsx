@@ -6,9 +6,10 @@ import React from "react"
 import BigCalendarContainer from "@/components/BigCalendarContainer"
 import { auth } from "@clerk/nextjs/server"
 import prisma from "@/lib/prisma"
+import EventCalendarContainer from "@/components/EventCalendarContainer"
 
 const StudentPage
-  = async () => {
+  = async ({ searchParams }: { searchParams: { [key: string]: string | undefined }}) => {
     const { userId } = await auth();
     const classItem = await prisma.class.findMany({
       where: {
@@ -31,7 +32,7 @@ const StudentPage
 
         {/* right */}
         <div className="w-full lg:w-1/3 flex flex-col gap-8">
-          <EventCalendar />
+          <EventCalendarContainer  searchParams={searchParams} />
           <Announcements />
         </div>
       </div>

@@ -47,7 +47,7 @@ const Navbar = async () => {
           <span className="text-xs leading-3 font-medium">{user?.username}</span>
           <span className="text-[10px] text-gray-500 text-right">{roleName}</span>
         </div>
-        <UserButton appearance={{
+        <UserButton afterSignOutUrl="/" appearance={{
           elements: {
             userButtonAvatarBox: {
               width: "36px",

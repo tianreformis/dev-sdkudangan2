@@ -8,9 +8,6 @@ import UserCard from "@/components/UserCard"
 
 
 
-
-
-
 const Admin =  ({ searchParams }: { searchParams: { [key: string]: string | undefined }}) => {
 
   return (
