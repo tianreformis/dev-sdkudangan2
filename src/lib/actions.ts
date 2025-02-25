@@ -697,28 +697,14 @@ export const createEvent = async (
   currentState: CurrentState,
   data: EventSchema
 ) => {
-  // const { userId, sessionClaims } = auth();
-  // const role = (sessionClaims?.metadata as { role?: string })?.role;
-
   try {
-    // if (role === "teacher") {
-    //   const teacherLesson = await prisma.lesson.findFirst({
-    //     where: {
-    //       teacherId: userId!,
-    //       id: data.lessonId,
-    //     },
-    //   });
-
-    //   if (!teacherLesson) {
-    //     return { success: false, error: true };
-    //   }
-    // }
 
     await prisma.event.create({
       data: {
         title: data.title,
         description: data.description ,
-        date: data.date,
+        startTime: data.startTime,
+        endTime: data.endTime,
         classId: data.classId,
       },
     });
@@ -733,35 +719,21 @@ export const createEvent = async (
 
 export const updateEvent = async (
   currentState: CurrentState,
-  data: ExamSchema
+  data: EventSchema
 ) => {
-  // const { userId, sessionClaims } = auth();
-  // const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   try {
-    // if (role === "teacher") {
-    //   const teacherLesson = await prisma.lesson.findFirst({
-    //     where: {
-    //       teacherId: userId!,
-    //       id: data.lessonId,
-    //     },
-    //   });
 
-    //   if (!teacherLesson) {
-    //     return { success: false, error: true };
-    //   }
-    // }
-
-    await prisma.exam.update({
+    await prisma.event.update({
       where: {
         id: data.id,
       },
       data: {
         title: data.title,
+        description: data.description ,
         startTime: data.startTime,
         endTime: data.endTime,
-        lessonId: data.lessonId,
-        examLink: data.examLink,
+        classId: data.classId,
       },
     });
 
@@ -779,14 +751,11 @@ export const deleteEvent = async (
 ) => {
   const id = data.get("id") as string;
 
-  // const { userId, sessionClaims } = auth();
-  // const role = (sessionClaims?.metadata as { role?: string })?.role;
-
   try {
-    await prisma.exam.delete({
+    await prisma.event.delete({
       where: {
         id: parseInt(id),
-        // ...(role === "teacher" ? { lesson: { teacherId: userId! } } : {}),
+      
       },
     });
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useFormState } from "react-dom";
-import { deleteClass, deleteExam, deleteLesson, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
+import { deleteClass, deleteEvent, deleteExam, deleteLesson, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
@@ -14,7 +14,7 @@ const deleteActionMap = {
   assignment: deleteSubject,
   attendance: deleteSubject,
   class: deleteClass,
-  event: deleteSubject,
+  event: deleteEvent,
   exam: deleteExam,
   lesson: deleteLesson,
   result: deleteSubject,
@@ -45,7 +45,7 @@ const ParentForm = dynamic(() => import("./Forms/ParentForm"), {
 const LessonForm = dynamic(() => import("./Forms/LessonForm"), {
   loading: () => <h1>loading...</h1>,
 });
-const EventForm = dynamic(() => import("./Forms/EventForm"),{
+const EventForm = dynamic(() => import("./Forms/EventForm"), {
   loading: () => <h1>loading...</h1>,
 });
 
@@ -134,12 +134,12 @@ const forms: {
       relatedData={relatedData}
     />,
 
-    event: (setOpen, type, data,relatedData) => 
-    <EventForm 
-    type={type} 
-    data={data} 
-    setOpen={setOpen} 
-    relatedData={relatedData} 
+  event: (setOpen, type, data, relatedData) =>
+    <EventForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
     />,
   //...more form components for other tables...
 }

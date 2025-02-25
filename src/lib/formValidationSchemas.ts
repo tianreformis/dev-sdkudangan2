@@ -140,8 +140,9 @@ export const eventSchema = z.object({
   id: z.coerce.number().optional(),
   title: z.string().min(3, { message: "Nama Acara minimal 3 karakter" }),
   description : z.string().min(3, { message: "Deskripsi minimal 3 karakter" }),
-  date :z.coerce.date(),
-  classId: z.coerce.number().min(1, { message: "Class is required!" }),
+  startTime :z.coerce.date(),
+  endTime :z.coerce.date(),
+  classId: z.coerce.number().min(1, { message: "Class is required!" }).optional(),//will store obj,
 
 });
 export type EventSchema = z.infer<typeof eventSchema>;

@@ -4,23 +4,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField";
 import {
+  eventSchema,
+  EventSchema,
   examSchema,
   ExamSchema,
-  subjectSchema,
-  SubjectSchema,
 } from "@/lib/formValidationSchemas";
 import {
+  createEvent,
   createExam,
-  createSubject,
+  updateEvent,
   updateExam,
-  updateSubject,
 } from "@/lib/actions";
 import { useFormState } from "react-dom";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-const ExamForm = ({
+const EventForm = ({
   type,
   data,
   setOpen,
@@ -35,14 +35,14 @@ const ExamForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ExamSchema>({
-    resolver: zodResolver(examSchema),
+  } = useForm<EventSchema>({
+    resolver: zodResolver(eventSchema),
   });
 
   // AFTER REACT 19 IT'LL BE USEACTIONSTATE
 
   const [state, formAction] = useFormState(
-    type === "create" ? createExam : updateExam,
+    type === "create" ? createEvent : updateEvent,
     {
       success: false,
       error: false,
@@ -76,24 +76,24 @@ const ExamForm = ({
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
-  const { lessons } = relatedData;
+  const { classes } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new exam" : "Update the exam"}
+        {type === "create" ? "Buat Acara Baru" : "Perbaharui Acara"}
       </h1>
 
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
-          label="Exam title"
+          label="Nama Acara"
           name="title"
           defaultValue={data?.title}
           register={register}
           error={errors?.title}
         />
         <InputField
-          label="Start Date"
+          label="Mulai"
           name="startTime"
           defaultValue={formatDateToLocal(data?.startTime)}
           register={register}
@@ -101,7 +101,7 @@ const ExamForm = ({
           type="datetime-local"
         />
         <InputField
-          label="End Date"
+          label="Selesai"
           name="endTime"
           defaultValue={formatDateToLocal(data?.endTime)}
           register={register}
@@ -109,11 +109,11 @@ const ExamForm = ({
           type="datetime-local"
         />
         <InputField
-          label="Link UJian"
-          name="examLink"
-          defaultValue={data?.examLink}
+          label="Deskripsi"
+          name="description"
+          defaultValue={data?.description}
           register={register}
-          error={errors?.examLink}
+          error={errors?.description}
           type="text"
         />
         {data && (
@@ -130,30 +130,30 @@ const ExamForm = ({
           <label className="text-xs text-gray-500">Lesson</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("lessonId")}
-            defaultValue={data?.teachers}
+            {...register("classId")}
+            defaultValue={data?.classes}
           >
-            {lessons.map((lesson: { id: number; name: string }) => (
-              <option value={lesson.id} key={lesson.id}>
-                {lesson.name}
+            {classes.map((classId: { id: number; name: string }) => (
+              <option value={classId.id} key={classId.id}>
+                {classId.name}
               </option>
             ))}
           </select>
-          {errors.lessonId?.message && (
+          {errors.classId?.message && (
             <p className="text-xs text-red-400">
-              {errors.lessonId.message.toString()}
+              {errors.classId.message.toString()}
             </p>
           )}
         </div>
       </div>
       {state.error && (
-        <span className="text-red-500">Something went wrong!</span>
+        <span className="text-red-500">Ada yang salah!</span>
       )}
       <button className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+        {type === "create" ? "Buat" : "Perbaharui"}
       </button>
     </form>
   );
 };
 
-export default ExamForm;
+export default EventForm;
