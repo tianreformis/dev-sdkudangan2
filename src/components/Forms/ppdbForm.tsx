@@ -69,7 +69,7 @@ const PPDBForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { grades, classes } = relatedData;
+  const { grades, classes,parents } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -190,14 +190,33 @@ const PPDBForm = ({
           error={errors.phone}
           type="tel"
         />
+         <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500">Orang Tua</label>
+          <select
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            {...register("parentId")}
+            defaultValue={data.parentId || ""}
+          >
+            {parents.map((parentId: { id: string; name: string; surname: string }) => (
+              <option value={parentId.id} key={parentId.id}>
+                {parentId.name || " "+ " " + parentId.surname || " "}
+              </option>
+            ))}
+          </select>
+          {errors.parentId?.message && (
+            <p className="text-xs text-red-400">
+              {errors.parentId.message.toString()}
+            </p>
+          )}
+        </div>
         <InputField
           label="Alamat"
           name="address"
           defaultValue={data?.address}
           register={register}
           error={errors.address}
-          type="textarea"          
-        />     
+          type="textarea"
+        />
         <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Golongan Darah</label>
           <select
@@ -209,7 +228,7 @@ const PPDBForm = ({
             <option value="B">B</option>
             <option value="AB">AB</option>
             <option value="O">O</option>
-            <option value="Unknown">Tidak Diketahui</option>            
+            <option value="Unknown">Tidak Diketahui</option>
           </select>
           {errors.bloodType?.message && (
             <p className="text-xs text-red-400">
@@ -282,15 +301,24 @@ const PPDBForm = ({
             disabled
           >
             {classes
-              .filter((classItem: any) => classItem.name === "PPDB")
-              .map((classItem: any) => (
-                <option value={classItem.id} key={classItem.id}>
-                  ({classItem.name} - {" "}
-                  {classItem._count.students + "/" + classItem.capacity}{" "}
-                  Kapasitas)
-                </option>
-              ))}
+              .filter((classItem: { name: string }) => classItem.name === "PPDB")
+              .map((classItem: {
+                id: number;
+                name: string;
+                capacity: number;
+                _count: { students: number };
+              }) => {
+                const students = Number(classItem._count.students) || 0;
+                const capacity = Number(classItem.capacity) || 0;
+
+                return (
+                  <option value={classItem.id} key={classItem.id}>
+                    ({classItem.name} - {students}/{capacity} Kapasitas)
+                  </option>
+                );
+              })}
           </select>
+
           {errors.classId?.message && (
             <p className="text-xs text-red-400">
               {errors.classId.message.toString()}
@@ -313,7 +341,7 @@ const PPDBForm = ({
             <li>
               Ketika mengedit data harus <span className="font-bold bg-red-300">mengupload ulang semua Gambar</span>, untuk menghemat penyimpanan
             </li>
-            </ol>
+          </ol>
         </p>
       </div>
       <button type="submit" className="bg-blue-400 text-white p-2 rounded-md">
