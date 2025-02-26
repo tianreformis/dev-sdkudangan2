@@ -31,7 +31,7 @@ const NewStudentListPage = async ({
     {
       header: "Username",
       accessor: "studentId",
-      className: "hidden md:table-cell",
+      className: "table-cell",
     },
     {
       header: "Kartu Keluarga",

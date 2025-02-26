@@ -74,10 +74,10 @@ const PPDBForm = ({
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new student" : "Update the student"}
+        {type === "create" ? "Tambah Data PPDB" : "Perbaharui Data PPDB "}
       </h1>
-      <span className="text-xs text-gray-400 font-medium">
-        Authentication Information
+      <span className="text-xs text-black font-bold">
+        Informasi Login
       </span>
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
@@ -103,8 +103,8 @@ const PPDBForm = ({
           error={errors?.password}
         />
       </div>
-      <span className="text-xs text-gray-400 font-medium">
-        Personal Information
+      <span className="text-xs text-black font-bold">
+        Informasi Pribadi
       </span>
       <div className="flex justify-between flex-wrap gap-4">
         <CldUploadWidget
@@ -169,33 +169,35 @@ const PPDBForm = ({
 
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
-          label="First Name"
+          label="Nama Depan"
           name="name"
           defaultValue={data?.name}
           register={register}
           error={errors.name}
         />
         <InputField
-          label="Last Name"
+          label="Nama Belakang"
           name="surname"
           defaultValue={data?.surname}
           register={register}
           error={errors.surname}
         />
         <InputField
-          label="Phone"
+          label="Nomor HP"
           name="phone"
           defaultValue={data?.phone}
           register={register}
           error={errors.phone}
+          type="tel"
         />
         <InputField
-          label="Address"
+          label="Alamat"
           name="address"
           defaultValue={data?.address}
           register={register}
           error={errors.address}
-        />
+          type="textarea"          
+        />     
         <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Golongan Darah</label>
           <select
@@ -216,7 +218,7 @@ const PPDBForm = ({
           )}
         </div>
         <InputField
-          label="Birthday"
+          label="Ulang Tahun"
           name="birthday"
           defaultValue={data?.birthday.toISOString().split("T")[0]}
           register={register}
@@ -241,7 +243,7 @@ const PPDBForm = ({
           />
         )}
         <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Sex</label>
+          <label className="text-xs text-gray-500">Jenis Kelamin</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("sex")}
@@ -257,7 +259,7 @@ const PPDBForm = ({
           )}
         </div>
         <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Grade</label>
+          <label className="text-xs text-gray-500">Tingkatan</label>
           <input type="hidden" {...register("gradeId")} value={1} />
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
@@ -277,6 +279,7 @@ const PPDBForm = ({
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("classId")}
             defaultValue={data?.classId}
+            disabled
           >
             {classes
               .filter((classItem: any) => classItem.name === "PPDB")
