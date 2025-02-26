@@ -15,7 +15,9 @@ export type FormContainerProps = {
   | "result"
   | "attendance"
   | "event"
-  | "announcement";
+  | "announcement"
+  | "ppdb"
+  ;
   type: "update" | "delete" | "create";
   data?: any; //data akan fetch dari database
 
@@ -101,6 +103,16 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
           select: { id: true, name: true },
         });
         relatedData = { classes: announcementClass };
+        break;
+
+      case "ppdb":
+        const newStudentGrades = await prisma.grade.findMany({
+          select: { id: true, level: true },
+        });
+        const newStudentClasses = await prisma.class.findMany({
+          include: { _count: { select: { students: true } } },
+        });
+        relatedData = { classes: newStudentClasses, grades: newStudentGrades };
         break;
 
       default:

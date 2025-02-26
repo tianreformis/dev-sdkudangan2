@@ -2,7 +2,7 @@ import { currentUser, User } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { Home09Icon, UserIcon, TeacherIcon, StudentsIcon, Books01Icon, StackStarIcon, TeachingIcon, Brain02Icon, Task01Icon, CheckmarkSquare03Icon, PresentationOnlineIcon, Calendar03Icon, Mail01Icon, PromotionIcon, UserAccountIcon, Settings02Icon, LogoutSquare02Icon } from "hugeicons-react";
+import { Home09Icon, UserIcon, TeacherIcon, StudentsIcon, Books01Icon, StackStarIcon, TeachingIcon, Brain02Icon, Task01Icon, CheckmarkSquare03Icon, PresentationOnlineIcon, Calendar03Icon, Mail01Icon, PromotionIcon, UserAccountIcon, Settings02Icon, LogoutSquare02Icon, LicenseDraftIcon } from "hugeicons-react";
 import { SignOutButton } from "@clerk/nextjs";
 
 
@@ -65,6 +65,7 @@ const menuItems = [
         href: "/list/assignments",
         visible: ["admin", "teacher", "student", "parent"],
       },
+      
       // {
       //   icon: <CheckmarkSquare03Icon size={24} color="#333" />,
       //   label: "Nilai",
@@ -83,6 +84,7 @@ const menuItems = [
         href: "/list/events",
         visible: ["admin", "teacher", "student", "parent"],
       },
+      
       // {
       //   icon: <Mail01Icon size={24} color="#333" />,
       //   label: "Pesan",
@@ -95,10 +97,16 @@ const menuItems = [
         href: "/list/announcements",
         visible: ["admin", "teacher", "student", "parent"],
       },
+      {
+        icon: <LicenseDraftIcon size={24} color="#333" />,
+        label: "PPDB",
+        href: "/list/ppdb",
+        visible: ["admin", "parent"],
+      },
     ],
   },
   {
-    title: "OTHER",
+    title: "LAIN",
     items: [
       {
         icon: <UserAccountIcon size={24} color="#333" />,

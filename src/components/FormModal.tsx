@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useFormState } from "react-dom";
-import { deleteAnnouncement, deleteClass, deleteEvent, deleteExam, deleteLesson, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
+import { deleteAnnouncement, deleteClass, deleteEvent, deleteExam, deleteLesson, deleteNewStudent, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
@@ -22,6 +22,7 @@ const deleteActionMap = {
   parent: deleteParent,
   teacher: deleteTeacher,
   announcement: deleteAnnouncement,
+  ppdb: deleteNewStudent,
 }
 
 const TeacherForm = dynamic(() => import("./Forms/TeacherForm"), {
@@ -50,6 +51,9 @@ const EventForm = dynamic(() => import("./Forms/EventForm"), {
 });
 
 const AnnouncementForm = dynamic(() => import("./Forms/AnnouncementForm"), {
+  loading: () => <h1>loading...</h1>,
+});
+const PPDBForm = dynamic(() => import("./Forms/ppdbForm"), {
   loading: () => <h1>loading...</h1>,
 });
 const AssginmentForm = dynamic(() => import("./Forms/AssignmentForm"));
@@ -151,6 +155,13 @@ const forms: {
       relatedData={relatedData}
 
     />,
+    ppdb: (setOpen, type, data, relatedData) =>
+      <PPDBForm
+        type={type}
+        data={data}
+        setOpen={setOpen}
+        relatedData={relatedData}  
+      />,
   //...more form components for other tables...
 }
 
