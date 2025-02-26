@@ -117,10 +117,10 @@ const PPDBForm = ({
           {({ open }) => {
             return (
               <div
-                className="text-xs text-black flex items-center gap-2 cursor-pointer"
+                className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={28} height={28} />
+                <Image src={data.img || "/upload.png"} alt="" width={68} height={68} />
                 <span>Upload Photo Murid</span>
               </div>
             );
@@ -136,10 +136,10 @@ const PPDBForm = ({
           {({ open }) => {
             return (
               <div
-                className="text-xs text-black flex items-center gap-2 cursor-pointer"
+                className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={28} height={28} />
+                <Image src={data.imgKartuKeluarga || "/upload.png"} alt="" width={68} height={68} />
                 <span>Upload KK</span>
               </div>
             );
@@ -155,10 +155,10 @@ const PPDBForm = ({
           {({ open }) => {
             return (
               <div
-                className="text-xs text-black flex items-center gap-2 cursor-pointer"
+                className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={28} height={28} />
+                <Image src={data.imgAktaKelahiran || "/upload.png"} alt="" width={68} height={68} />
                 <span>Upload Akta Kelahiran</span>
               </div>
             );
