@@ -120,7 +120,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src={data.img || "/upload.png"} alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={68} height={68} />
                 <span>Upload Photo Murid</span>
               </div>
             );
@@ -139,7 +139,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src={data.imgKartuKeluarga || "/upload.png"} alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={68} height={68} />
                 <span>Upload KK</span>
               </div>
             );
@@ -158,7 +158,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src={data.imgAktaKelahiran || "/upload.png"} alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={68} height={68} />
                 <span>Upload Akta Kelahiran</span>
               </div>
             );
@@ -298,6 +298,21 @@ const PPDBForm = ({
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>
       )}
+
+      <div>
+        <span className="bg-yellow-50 text-sm font-bold">Perhatian :</span>
+        <p className="text-xs text-black">
+          <ol className="list-decimal list-inside">
+            <li>Pastikan semua data telah terisi dengan benar</li>
+            <li>
+              Gambar yang diunggah harus berformat JPEG, PNG, atau JPG
+            </li>
+            <li>
+              Ketika mengedit data harus <span className="font-bold bg-red-300">mengupload ulang semua Gambar</span>, untuk menghemat penyimpanan
+            </li>
+            </ol>
+        </p>
+      </div>
       <button type="submit" className="bg-blue-400 text-white p-2 rounded-md">
         {type === "create" ? "Create" : "Update"}
       </button>
