@@ -1,7 +1,7 @@
 "use server"
 
 import { auth, clerkClient, Client } from "@clerk/nextjs/server";
-import { AnnouncementSchema, ClassSchema, EventSchema, ExamSchema, LessonSchema, ParentSchema, StudentSchema, SubjectSchema, TeacherSchema } from "./formValidationSchemas"
+import { AnnouncementSchema, ClassSchema, EventSchema, ExamSchema, LessonSchema, NewStudentSchema, ParentSchema, StudentSchema, SubjectSchema, TeacherSchema } from "./formValidationSchemas"
 import prisma from "./prisma"
 
 type CurrentState = { success: boolean; error: boolean; erorr?: undefined; } | { success: boolean; erorr: boolean; error?: undefined; }
@@ -840,7 +840,7 @@ export const deleteAnnouncement = async (
 
 export const createNewStudent = async (
   currentState: CurrentState,
-  data: StudentSchema
+  data: NewStudentSchema
 ) => {
   console.log(data);
   try {
@@ -872,8 +872,8 @@ export const createNewStudent = async (
         phone: data.phone || null,
         address: data.address,
         img: data.img || null,
-        imgKartuKeluarga: data.img || null,
-        imgAktaKelahiran: data.img || null,
+        imgKartuKeluarga: data.imgKartuKeluarga || null,
+        imgAktaKelahiran: data.imgAktaKelahiran || null,
         bloodType: data.bloodType,
         sex: data.sex,
         birthday: data.birthday,
@@ -893,7 +893,7 @@ export const createNewStudent = async (
 
 export const updateNewStudent = async (
   currentState: CurrentState,
-  data: StudentSchema
+  data: NewStudentSchema
 ) => {
   if (!data.id) {
     return { success: false, error: true }
