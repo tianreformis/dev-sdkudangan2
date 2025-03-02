@@ -190,7 +190,8 @@ const PPDBForm = ({
           error={errors.phone}
           type="tel"
         />
-         <div className="flex flex-col gap-2 w-full md:w-1/4">
+        {/* Parent */}
+         {/* <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Orang Tua</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
@@ -208,7 +209,8 @@ const PPDBForm = ({
               {errors.parentId.message.toString()}
             </p>
           )}
-        </div>
+        </div> */}
+        
         <InputField
           label="Alamat"
           name="address"
