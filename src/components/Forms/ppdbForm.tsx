@@ -69,7 +69,7 @@ const PPDBForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { grades, classes,parents } = relatedData;
+  const { grades, classes, parents } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -191,12 +191,12 @@ const PPDBForm = ({
           type="tel"
         />
         {/* Parent */}
-         {/* <div className="flex flex-col gap-2 w-full md:w-1/4">
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Orang Tua</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("parentId")}
-            defaultValue={data.parentId || ""}
+            defaultValue={data?.parentId || ""}
           >
             {parents.map((parentId: { id: string; name: string; surname: string }) => (
               <option value={parentId.id} key={parentId.id}>
@@ -209,8 +209,8 @@ const PPDBForm = ({
               {errors.parentId.message.toString()}
             </p>
           )}
-        </div> */}
-        
+        </div>
+
         <InputField
           label="Alamat"
           name="address"
@@ -246,13 +246,6 @@ const PPDBForm = ({
           error={errors.birthday}
           type="date"
         />
-        {/* <InputField
-          label="Parent Id"
-          name="parentId"
-          defaultValue={data?.parentId}
-          register={register}
-          error={errors.parentId}
-        /> */}
         {data && (
           <InputField
             label="Id"
@@ -279,7 +272,7 @@ const PPDBForm = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
+        <div className=" gap-2 w-full md:w-1/4 hidden">
           <label className="text-xs text-gray-500">Tingkatan</label>
           <input type="hidden" {...register("gradeId")} value={1} />
           <select
@@ -294,33 +287,32 @@ const PPDBForm = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
+        <div className="gap-2 w-full md:w-1/4 hidden">
           <label className="text-xs text-gray-500">Kelas</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("classId")}
             defaultValue={data?.classId}
-            disabled
+            disabled={isNaN(Number(data?.classId))}          
           >
             {classes
-              .filter((classItem: { name: string }) => classItem.name === "PPDB")
-              .map((classItem: {
+            .filter((classItem : {name:string})=> classItem.name.includes("PPDB"))            
+            .map(
+              (classItem: {
                 id: number;
                 name: string;
                 capacity: number;
                 _count: { students: number };
-              }) => {
-                const students = Number(classItem._count.students) || 0;
-                const capacity = Number(classItem.capacity) || 0;
+              }) => (
+                <option value={classItem.id} key={classItem.id}>
+                  ({classItem.name} - {" "}
+                  {classItem._count.students + "/" + classItem.capacity}{" "}
+                  Kapasitas)
+                </option>
 
-                return (
-                  <option value={classItem.id} key={classItem.id}>
-                    ({classItem.name} - {students}/{capacity} Kapasitas)
-                  </option>
-                );
-              })}
+              ),
+            )}
           </select>
-
           {errors.classId?.message && (
             <p className="text-xs text-red-400">
               {errors.classId.message.toString()}
