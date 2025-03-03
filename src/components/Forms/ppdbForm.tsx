@@ -72,7 +72,7 @@ const PPDBForm = ({
   const { grades, classes, parents } = relatedData;
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-2 sm:overflow-y-scroll" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
         {type === "create" ? "Tambah Data PPDB" : "Perbaharui Data PPDB "}
       </h1>
@@ -391,8 +391,8 @@ const PPDBForm = ({
           </ol>
         </p>
       </div>
-      <button type="submit" className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+      <button type="submit" className="bg-blue-400 hover:bg-blue-800 text-white p-2 rounded-md">
+        {type === "create" ? "Buat" : "Perbaharui"}
       </button>
     </form>
   );
