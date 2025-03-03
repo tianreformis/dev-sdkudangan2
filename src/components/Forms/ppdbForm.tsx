@@ -200,7 +200,7 @@ const PPDBForm = ({
           >
             {parents.map((parentId: { id: string; name: string; surname: string }) => (
               <option value={parentId.id} key={parentId.id}>
-                {parentId.name || " "+ " " + parentId.surname || " "}
+                {parentId.name || " " + " " + parentId.surname || " "}
               </option>
             ))}
           </select>
@@ -272,6 +272,59 @@ const PPDBForm = ({
             </p>
           )}
         </div>
+        {type === "create" && (
+          <>
+            <div className="flex flex-col gap-2 w-full md:w-1/4">
+              <label className="text-xs text-gray-500">Tingkatan</label>
+              <input type="hidden" {...register("gradeId")} value={1} />
+              <select
+                className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+                disabled
+              >
+                <option value={1}>1</option>
+              </select>
+              {errors.gradeId?.message && (
+                <p className="text-xs text-red-400">
+                  {errors.gradeId.message.toString()}
+                </p>
+              )}
+            </div>
+
+            <div className="gap-2 w-full md:w-1/4 flex flex-col">
+              <label className="text-xs text-gray-500">Kelas</label>
+              <select
+                className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+                {...register("classId")}
+                defaultValue={data?.classId}
+                
+              >
+                {classes
+                  .filter((classItem: { name: string }) => classItem.name.includes("PPDB"))
+                  .map(
+                    (classItem: {
+                      id: number;
+                      name: string;
+                      capacity: number;
+                      _count: { students: number };
+                    }) => (
+                      <option value={classItem.id} key={classItem.id}>
+                        ({classItem.name} - {" "}
+                        {classItem._count.students + "/" + classItem.capacity}{" "}
+                        Kapasitas)
+                      </option>
+
+                    ),
+                  )}
+              </select>
+              {errors.classId?.message && (
+                <p className="text-xs text-red-400">
+                  {errors.classId.message.toString()}
+                </p>
+              )}
+            </div>
+          </>
+
+        )}
         <div className=" gap-2 w-full md:w-1/4 hidden">
           <label className="text-xs text-gray-500">Tingkatan</label>
           <input type="hidden" {...register("gradeId")} value={1} />
@@ -293,25 +346,25 @@ const PPDBForm = ({
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("classId")}
             defaultValue={data?.classId}
-            disabled={isNaN(Number(data?.classId))}          
+            disabled={isNaN(Number(data?.classId))}
           >
             {classes
-            .filter((classItem : {name:string})=> classItem.name.includes("PPDB"))            
-            .map(
-              (classItem: {
-                id: number;
-                name: string;
-                capacity: number;
-                _count: { students: number };
-              }) => (
-                <option value={classItem.id} key={classItem.id}>
-                  ({classItem.name} - {" "}
-                  {classItem._count.students + "/" + classItem.capacity}{" "}
-                  Kapasitas)
-                </option>
+              .filter((classItem: { name: string }) => classItem.name.includes("PPDB"))
+              .map(
+                (classItem: {
+                  id: number;
+                  name: string;
+                  capacity: number;
+                  _count: { students: number };
+                }) => (
+                  <option value={classItem.id} key={classItem.id}>
+                    ({classItem.name} - {" "}
+                    {classItem._count.students + "/" + classItem.capacity}{" "}
+                    Kapasitas)
+                  </option>
 
-              ),
-            )}
+                ),
+              )}
           </select>
           {errors.classId?.message && (
             <p className="text-xs text-red-400">
