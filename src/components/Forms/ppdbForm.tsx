@@ -72,7 +72,7 @@ const PPDBForm = ({
   const { grades, classes, parents } = relatedData;
 
   return (
-    <form className="flex flex-col gap-2 sm:overflow-y-scroll" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-2" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
         {type === "create" ? "Tambah Data PPDB" : "Perbaharui Data PPDB "}
       </h1>
@@ -120,7 +120,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload Photo Murid</span>
               </div>
             );
@@ -139,7 +139,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload KK</span>
               </div>
             );
@@ -158,7 +158,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload Akta Kelahiran</span>
               </div>
             );

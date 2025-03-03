@@ -192,6 +192,8 @@ const FormModal = ({
 
     const router = useRouter();
 
+
+
     useEffect(() => {
       if (state.success) {
         toast(`${table === "subject" ? "Mata pelajaran" : table} sudah dihapus!`);
