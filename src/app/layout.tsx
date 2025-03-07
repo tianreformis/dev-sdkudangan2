@@ -13,7 +13,7 @@ const systemfont = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "SD Kudangan 2 Sistem Manajemen Sekolah",
+  title: "SD Negeri Kudangan 2 Sistem Manajemen Sekolah",
   description: "SD Kudangan 2 Sistem Manajemen Sekolah",
 };
 

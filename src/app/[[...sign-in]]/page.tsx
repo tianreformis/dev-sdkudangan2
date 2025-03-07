@@ -45,7 +45,7 @@ const LoginPage = () => {
               alt=""
               width={80}
               height={50} />
-            SD Kudangan 2
+            SD Negeri Kudangan 2
           </h1>
           <h2 className="text-black">Masuk ke Akun Anda</h2>
           <Clerk.GlobalError className="text-sm text-red-400" />

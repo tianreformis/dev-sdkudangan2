@@ -246,17 +246,6 @@ const PPDBForm = ({
           error={errors.birthday}
           type="date"
         />
-<<<<<<< HEAD
-        {/* <InputField
-          label="Parent Id"
-          name="parentId"
-          defaultValue={data?.parentId}
-          register={register}
-          error={errors.parentId}Update
-
-        /> */}
-=======
->>>>>>> ca1330c5600ecf1863c2d3ab13f265e184dbd7fa
         {data && (
           <InputField
             label="Id"
@@ -360,19 +349,6 @@ const PPDBForm = ({
             disabled={isNaN(Number(data?.classId))}
           >
             {classes
-<<<<<<< HEAD
-              .filter((classItem: { name: string }) => classItem.name === "PPDB")
-              .map((classItem: {
-                id: number;
-                name: string;
-                capacity: number;
-                _count: { students: number };
-              }) => {
-
-                return (
-                  <option value={classItem.id} key={classItem.id}>
-                    ({classItem.name} - {classItem._count.students}/{classItem.capacity} Kapasitas)
-=======
               .filter((classItem: { name: string }) => classItem.name.includes("PPDB"))
               .map(
                 (classItem: {
@@ -385,7 +361,6 @@ const PPDBForm = ({
                     ({classItem.name} - {" "}
                     {classItem._count.students + "/" + classItem.capacity}{" "}
                     Kapasitas)
->>>>>>> ca1330c5600ecf1863c2d3ab13f265e184dbd7fa
                   </option>
 
                 ),
