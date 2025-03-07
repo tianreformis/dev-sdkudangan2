@@ -69,10 +69,10 @@ const PPDBForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { grades, classes,parents } = relatedData;
+  const { grades, classes, parents } = relatedData;
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-2" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
         {type === "create" ? "Tambah Data PPDB" : "Perbaharui Data PPDB "}
       </h1>
@@ -120,7 +120,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload Photo Murid</span>
               </div>
             );
@@ -139,7 +139,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload KK</span>
               </div>
             );
@@ -158,7 +158,7 @@ const PPDBForm = ({
                 className="text-xs text-black flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => open()}
               >
-                <Image src="/upload.png" alt="" width={68} height={68} />
+                <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload Akta Kelahiran</span>
               </div>
             );
@@ -190,16 +190,17 @@ const PPDBForm = ({
           error={errors.phone}
           type="tel"
         />
-         <div className="flex flex-col gap-2 w-full md:w-1/4">
+        {/* Parent */}
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Orang Tua</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("parentId")}
-            defaultValue={data.parentId || ""}
+            defaultValue={data?.parentId || ""}
           >
             {parents.map((parentId: { id: string; name: string; surname: string }) => (
               <option value={parentId.id} key={parentId.id}>
-                {parentId.name || " "+ " " + parentId.surname || " "}
+                {parentId.name || " " + " " + parentId.surname || " "}
               </option>
             ))}
           </select>
@@ -209,6 +210,7 @@ const PPDBForm = ({
             </p>
           )}
         </div>
+
         <InputField
           label="Alamat"
           name="address"
@@ -244,6 +246,7 @@ const PPDBForm = ({
           error={errors.birthday}
           type="date"
         />
+<<<<<<< HEAD
         {/* <InputField
           label="Parent Id"
           name="parentId"
@@ -252,6 +255,8 @@ const PPDBForm = ({
           error={errors.parentId}Update
 
         /> */}
+=======
+>>>>>>> ca1330c5600ecf1863c2d3ab13f265e184dbd7fa
         {data && (
           <InputField
             label="Id"
@@ -278,7 +283,60 @@ const PPDBForm = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
+        {type === "create" && (
+          <>
+            <div className="flex flex-col gap-2 w-full md:w-1/4">
+              <label className="text-xs text-gray-500">Tingkatan</label>
+              <input type="hidden" {...register("gradeId")} value={1} />
+              <select
+                className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+                disabled
+              >
+                <option value={1}>1</option>
+              </select>
+              {errors.gradeId?.message && (
+                <p className="text-xs text-red-400">
+                  {errors.gradeId.message.toString()}
+                </p>
+              )}
+            </div>
+
+            <div className="gap-2 w-full md:w-1/4 flex flex-col">
+              <label className="text-xs text-gray-500">Kelas</label>
+              <select
+                className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+                {...register("classId")}
+                defaultValue={data?.classId}
+                
+              >
+                {classes
+                  .filter((classItem: { name: string }) => classItem.name.includes("PPDB"))
+                  .map(
+                    (classItem: {
+                      id: number;
+                      name: string;
+                      capacity: number;
+                      _count: { students: number };
+                    }) => (
+                      <option value={classItem.id} key={classItem.id}>
+                        ({classItem.name} - {" "}
+                        {classItem._count.students + "/" + classItem.capacity}{" "}
+                        Kapasitas)
+                      </option>
+
+                    ),
+                  )}
+              </select>
+              {errors.classId?.message && (
+                <p className="text-xs text-red-400">
+                  {errors.classId.message.toString()}
+                </p>
+              )}
+            </div>
+          </>
+
+        )}
+        <div className=" gap-2 w-full md:w-1/4 hidden">
           <label className="text-xs text-gray-500">Tingkatan</label>
           <input type="hidden" {...register("gradeId")} value={1} />
           <select
@@ -293,15 +351,16 @@ const PPDBForm = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
+        <div className="gap-2 w-full md:w-1/4 hidden">
           <label className="text-xs text-gray-500">Kelas</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("classId")}
             defaultValue={data?.classId}
-            disabled
+            disabled={isNaN(Number(data?.classId))}
           >
             {classes
+<<<<<<< HEAD
               .filter((classItem: { name: string }) => classItem.name === "PPDB")
               .map((classItem: {
                 id: number;
@@ -313,11 +372,25 @@ const PPDBForm = ({
                 return (
                   <option value={classItem.id} key={classItem.id}>
                     ({classItem.name} - {classItem._count.students}/{classItem.capacity} Kapasitas)
+=======
+              .filter((classItem: { name: string }) => classItem.name.includes("PPDB"))
+              .map(
+                (classItem: {
+                  id: number;
+                  name: string;
+                  capacity: number;
+                  _count: { students: number };
+                }) => (
+                  <option value={classItem.id} key={classItem.id}>
+                    ({classItem.name} - {" "}
+                    {classItem._count.students + "/" + classItem.capacity}{" "}
+                    Kapasitas)
+>>>>>>> ca1330c5600ecf1863c2d3ab13f265e184dbd7fa
                   </option>
-                );
-              })}
-          </select>
 
+                ),
+              )}
+          </select>
           {errors.classId?.message && (
             <p className="text-xs text-red-400">
               {errors.classId.message.toString()}
@@ -343,8 +416,8 @@ const PPDBForm = ({
           </ol>
         </p>
       </div>
-      <button type="submit" className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+      <button type="submit" className="bg-blue-400 hover:bg-blue-800 text-white p-2 rounded-md">
+        {type === "create" ? "Buat" : "Perbaharui"}
       </button>
     </form>
   );

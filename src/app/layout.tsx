@@ -13,8 +13,8 @@ const systemfont = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "SD Kudangan 2 Sistem",
-  description: "SD Kudangan 2 Sistem",
+  title: "SD Kudangan 2 Sistem Manajemen Sekolah",
+  description: "SD Kudangan 2 Sistem Manajemen Sekolah",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider afterSignOutUrl={'/'}>
+    <ClerkProvider afterSignOutUrl='/'>
 
       <html lang="en">
         <body className={systemfont.className}>
