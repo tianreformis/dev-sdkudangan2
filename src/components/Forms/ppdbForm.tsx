@@ -249,7 +249,8 @@ const PPDBForm = ({
           name="parentId"
           defaultValue={data?.parentId}
           register={register}
-          error={errors.parentId}
+          error={errors.parentId}Update
+
         /> */}
         {data && (
           <InputField
@@ -308,12 +309,10 @@ const PPDBForm = ({
                 capacity: number;
                 _count: { students: number };
               }) => {
-                const students = Number(classItem._count.students) || 0;
-                const capacity = Number(classItem.capacity) || 0;
 
                 return (
                   <option value={classItem.id} key={classItem.id}>
-                    ({classItem.name} - {students}/{capacity} Kapasitas)
+                    ({classItem.name} - {classItem._count.students}/{classItem.capacity} Kapasitas)
                   </option>
                 );
               })}
