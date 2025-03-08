@@ -47,7 +47,7 @@ const TeacherForm = ({
   });
 
   const router = useRouter();
-
+  
 
   useEffect(() => {
     if (state.success) {
@@ -142,6 +142,7 @@ const TeacherForm = ({
             </p>
           )}
         </div>
+        
         <InputField
           label="Ulang Tahun"
           name="birthday"
