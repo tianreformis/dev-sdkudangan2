@@ -47,6 +47,7 @@ const TeacherForm = ({
   });
 
   const router = useRouter();
+  
 
   useEffect(() => {
     if (state.success) {
@@ -180,6 +181,24 @@ const TeacherForm = ({
           {errors.subjects?.message && (
             <p className="text-xs text-red-400">
               {errors.subjects.message.toString()}
+            </p>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500">Tugas Tambahan</label>
+          <select
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            {...register("additionalDepartment")}
+            defaultValue={data?.additionalDepartment}
+          >
+            <option value="Wakasek Kurikulum">Wakasek Kurikulum</option>
+            <option value="Wakasek Kesiswaan">Wakasek Kesiswaan</option>
+            <option value="Bendahara Bos">Bendahara Bos</option>
+            <option value="Guru Kelas">Guru Kelas</option>
+          </select>
+          {errors.additionalDepartment?.message && (
+            <p className="text-xs text-red-400">
+              {errors.additionalDepartment.message.toString()}
             </p>
           )}
         </div>

@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
     "editor.fontSize": 18,
-=======
-    "editor.fontSize": 16,
->>>>>>> ca1330c5600ecf1863c2d3ab13f265e184dbd7fa
     "editor.fontFamily": "Fira Code",
     "editor.tabSize": 2,
     "editor.minimap.autohide": true,
@@ -15,11 +11,7 @@
     "files.autoSaveDelay": 1000,
     "workbench.colorTheme": "Monokai",
     "workbench.iconTheme": "material-icon-theme",
-<<<<<<< HEAD
     "terminal.integrated.fontSize": 16,
-=======
-    "terminal.integrated.fontSize": 14,
->>>>>>> ca1330c5600ecf1863c2d3ab13f265e184dbd7fa
     "terminal.integrated.fontFamily": "Fira Code",
     "git.enableSmartCommit": true,
     "git.autofetch": true,
