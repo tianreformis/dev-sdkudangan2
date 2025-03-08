@@ -183,7 +183,8 @@ const TeacherForm = ({
             multiple
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("subjects")}
-            defaultValue={data?.subjects}
+            defaultValue={data?.subjects.map((subject: { id: number; name: string }) => subject.id)} // map values to id
+
           >
             {subjects.map((subject: { id: number; name: string }) => (
               <option value={subject.id} key={subject.id}>
@@ -204,10 +205,12 @@ const TeacherForm = ({
             {...register("additionalDepartment")}
             defaultValue={data?.additionalDepartment}
           >
+            <option value="">Tidak ada</option>
             <option value="Wakasek Kurikulum">Wakasek Kurikulum</option>
             <option value="Wakasek Kesiswaan">Wakasek Kesiswaan</option>
             <option value="Bendahara Bos">Bendahara Bos</option>
             <option value="Guru Kelas">Guru Kelas</option>
+            
           </select>
           {errors.additionalDepartment?.message && (
             <p className="text-xs text-red-400">

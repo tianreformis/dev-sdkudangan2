@@ -1,4 +1,5 @@
 import { z } from "zod";
+import * as CryptoJS from 'crypto-js';
 
 
 // Function to check if a password has been pwned using the Have I Been Pwned AP
@@ -29,7 +30,8 @@ export const teacherSchema = z.object({
     .max(20, { message: "Nama Pengguna maksimal 20 karakter" }),
   password: z
     .string()
-    .min(8, { message: "Kata Sandi setidaknya 8 karakter" }).optional()
+    .min(8, { message: "Kata Sandi setidaknya 8 karakter" })
+    .optional()
     .or(z.literal("")),
   email: z
     .string()

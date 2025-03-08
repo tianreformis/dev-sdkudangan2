@@ -203,7 +203,7 @@ export const updateTeacher = async (
         phone: data.phone || null,
         address: data.address,
         img: data.img || null,
-        additionalDepartment : data.additionalDepartment || "-",
+        additionalDepartment : data.additionalDepartment || null,
         bloodType: data.bloodType,
         sex: data.sex,
         birthday: data.birthday,
