@@ -1,4 +1,5 @@
 import { z } from "zod";
+import * as CryptoJS from 'crypto-js';
 
 
 // Function to check if a password has been pwned using the Have I Been Pwned AP
@@ -29,7 +30,8 @@ export const teacherSchema = z.object({
     .max(20, { message: "Nama Pengguna maksimal 20 karakter" }),
   password: z
     .string()
-    .min(8, { message: "Kata Sandi setidaknya 8 karakter" }).optional()
+    .min(8, { message: "Kata Sandi setidaknya 8 karakter" })
+    .optional()
     .or(z.literal("")),
   email: z
     .string()
@@ -46,6 +48,9 @@ export const teacherSchema = z.object({
   img: z.string().optional(),
   subjects: z.array(z.string(
   )).optional(),//will store obj ids
+  additionalDepartment: z
+    .string({ message: "Nama belakang minimal 3 karakter" })
+    .optional(),
 });
 
 export type TeacherSchema = z.infer<typeof teacherSchema>;
@@ -139,9 +144,9 @@ export type LessonSchema = z.infer<typeof lessonSchema>;
 export const eventSchema = z.object({
   id: z.coerce.number().optional(),
   title: z.string().min(3, { message: "Nama Acara minimal 3 karakter" }),
-  description : z.string().min(3, { message: "Deskripsi minimal 3 karakter" }),
-  startTime :z.coerce.date(),
-  endTime :z.coerce.date(),
+  description: z.string().min(3, { message: "Deskripsi minimal 3 karakter" }),
+  startTime: z.coerce.date(),
+  endTime: z.coerce.date(),
   classId: z.coerce.number().min(1, { message: "Class is required!" }).optional(),//will store obj,
 
 });
@@ -150,8 +155,8 @@ export type EventSchema = z.infer<typeof eventSchema>;
 export const announcementSchema = z.object({
   id: z.coerce.number().optional(),
   title: z.string().min(3, { message: "Nama Acara minimal 3 karakter" }),
-  description : z.string().min(3, { message: "Deskripsi minimal 3 karakter" }),
-  date :z.coerce.date(),  
+  description: z.string().min(3, { message: "Deskripsi minimal 3 karakter" }),
+  date: z.coerce.date(),
   classId: z.coerce.number().nullable().optional(),//will store obj,
 
 });

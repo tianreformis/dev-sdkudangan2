@@ -47,6 +47,7 @@ const TeacherForm = ({
   });
 
   const router = useRouter();
+  
 
   useEffect(() => {
     if (state.success) {
@@ -122,13 +123,26 @@ const TeacherForm = ({
           register={register}
           error={errors.address}
         />
-        <InputField
-          label="Golongan Darah"
-          name="bloodType"
-          defaultValue={data?.bloodType}
-          register={register}
-          error={errors.bloodType}
-        />
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500">Golongan Darah</label>
+          <select
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            {...register("bloodType")}
+            defaultValue={data?.bloodType}
+          >
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+            <option value="Unknown">Tidak Diketahui</option>
+          </select>
+          {errors.bloodType?.message && (
+            <p className="text-xs text-red-400">
+              {errors.bloodType.message.toString()}
+            </p>
+          )}
+        </div>
+        
         <InputField
           label="Ulang Tahun"
           name="birthday"
@@ -169,7 +183,8 @@ const TeacherForm = ({
             multiple
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("subjects")}
-            defaultValue={data?.subjects}
+            defaultValue={data?.subjects.map((subject: { id: number; name: string }) => subject.id)} // map values to id
+
           >
             {subjects.map((subject: { id: number; name: string }) => (
               <option value={subject.id} key={subject.id}>
@@ -180,6 +195,26 @@ const TeacherForm = ({
           {errors.subjects?.message && (
             <p className="text-xs text-red-400">
               {errors.subjects.message.toString()}
+            </p>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500">Tugas Tambahan</label>
+          <select
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            {...register("additionalDepartment")}
+            defaultValue={data?.additionalDepartment}
+          >
+            <option value="">Tidak ada</option>
+            <option value="Wakasek Kurikulum">Wakasek Kurikulum</option>
+            <option value="Wakasek Kesiswaan">Wakasek Kesiswaan</option>
+            <option value="Bendahara Bos">Bendahara Bos</option>
+            <option value="Guru Kelas">Guru Kelas</option>
+            
+          </select>
+          {errors.additionalDepartment?.message && (
+            <p className="text-xs text-red-400">
+              {errors.additionalDepartment.message.toString()}
             </p>
           )}
         </div>

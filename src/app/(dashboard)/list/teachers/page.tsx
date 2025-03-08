@@ -30,37 +30,39 @@ const TeachersListsPage = async ({
       accessor: "info",
     },
     {
-      header: "Teacher ID",
+      header: "Nama Pengguna",
       accessor: "teacherId",
       className: "hidden md:table-cell",
     },
 
     {
-      header: "Subjects",
+      header: "Pelajaran/Tugas Tambahan",
       accessor: "subjects",
       className: "hidden md:table-cell",
     },
     {
-      header: "Classes",
+      header: "Kelas",
       accessor: "classes",
       className: "hidden md:table-cell",
     },
     {
-      header: "Phone",
+      header: "Telepon",
       accessor: "phone",
       className: "hidden lg:table-cell",
     },
     {
-      header: "Address",
+      header: "Alamat",
       accessor: "address",
       className: "hidden lg:table-cell",
     },
-    ...(role === "admin" ? [{
+    ...(role === "nulladmin" ? [{
       header: "Actions",
       accessor: "action",
     }] : []),
 
   ]
+
+  
   const renderRow = (item: TeacherList) => (
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
       <td className="flex items-center gap-4 m-2">
@@ -75,7 +77,15 @@ const TeachersListsPage = async ({
         </div>
       </td>
       <td className="hidden md:table-cell">{item.name}</td>
-      <td className="hidden md:table-cell">{item.subjects.map((subject) => subject.name).join(",")}</td>
+      <td className="hidden md:table-cell">
+        <div>
+        <p>
+          {item.subjects.map((subject) => subject.name).join(",")}
+        <span>{item.additionalDepartment ?"/"+ item.additionalDepartment : ""}</span>
+        </p>
+        </div>
+        
+        </td>
       <td className="hidden md:table-cell">{item.classes.map((classItem) => classItem.name).join(",")}</td>
       <td className="hidden md:table-cell">{item.phone}</td>
       <td className="hidden md:table-cell">{item.address}</td>
