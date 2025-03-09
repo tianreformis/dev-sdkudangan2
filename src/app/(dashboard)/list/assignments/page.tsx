@@ -1,3 +1,4 @@
+import FormContainer from "@/components/FormContainer"
 import FormModal from "@/components/FormModal"
 import Pagination from "@/components/Pagination"
 import Table from "@/components/Table"
@@ -36,9 +37,20 @@ const AssignmentListsPage = async ({
       header: "Kelas",
       accessor: "class",
     },
+    
     {
       header: "Guru",
       accessor: "teacher",
+      className: "hidden md:table-cell",
+    },
+    {
+      header: "Judul",
+      accessor: "Title",
+      className: "hidden md:table-cell",
+    },
+    {
+      header: "Waktu Mulai",
+      accessor: "startDate",
       className: "hidden md:table-cell",
     },
     {
@@ -58,6 +70,10 @@ const AssignmentListsPage = async ({
       <td className="flex items-center gap-4 p-4">{item.lesson.subject.name}</td>
       <td>{item.lesson.class.name}</td>
       <td className="hidden md:table-cell hover:underline">{item.lesson.teacher.name + " " + item.lesson.teacher.surname}</td>
+      <td className="hidden md:table-cell text-wrap flex-wrap">{item.title}</td>
+      <td className="hidden md:table-cell hover:underline">
+        {new Intl.DateTimeFormat("en-US").format(item.startDate)}
+      </td>
       <td className="hidden md:table-cell hover:underline">
         {new Intl.DateTimeFormat("en-US").format(item.dueDate)}
       </td>
@@ -65,8 +81,8 @@ const AssignmentListsPage = async ({
         <div className="flex items-center gap-2">
           {(role === "admin" || role === "teacher") && (
             <>
-              <FormModal table="assignment" type="update" data={item} />
-              <FormModal table="assignment" type="delete" id={item.id} />
+              <FormContainer table="assignment" type="update" data={item} />
+              <FormContainer table="assignment" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -171,7 +187,7 @@ const AssignmentListsPage = async ({
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && (
-              <FormModal table="assignment" type="create" />
+              <FormContainer table="assignment" type="create" />
             )}
 
 

@@ -4,14 +4,14 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useFormState } from "react-dom";
-import { deleteAnnouncement, deleteClass, deleteEvent, deleteExam, deleteLesson, deleteNewStudent, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
+import { deleteAnnouncement, deleteAssignment, deleteClass, deleteEvent, deleteExam, deleteLesson, deleteNewStudent, deleteParent, deleteStudent, deleteSubject, deleteTeacher } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
 
 const deleteActionMap = {
   subject: deleteSubject,
-  assignment: deleteSubject,
+  assignment: deleteAssignment,
   attendance: deleteSubject,
   class: deleteClass,
   event: deleteEvent,
@@ -56,7 +56,9 @@ const AnnouncementForm = dynamic(() => import("./Forms/AnnouncementForm"), {
 const PPDBForm = dynamic(() => import("./Forms/ppdbForm"), {
   loading: () => <h1>loading...</h1>,
 });
-const AssginmentForm = dynamic(() => import("./Forms/AssignmentForm"));
+const AssignmentForm = dynamic(() => import("./Forms/AssignmentForm"), {
+  loading: () => <h1>loading...</h1>,
+});
 const AttendaceForm = dynamic(() => import("./Forms/AtterndanceForm"));
 
 
@@ -74,13 +76,20 @@ const forms: {
   ) => JSX.Element;
 } = {
 
-  assignment: (setOpen, type, data) => <AssginmentForm type={type} data={data} />,
+
   attendace: (setOpen, type, data) => <AttendaceForm type={type} data={data} />,
 
 
 
 
   // result: (setOpen, type, data) => <ResultForm type={type} data={data} relatedData={relatedData} />,
+  assignment: (setOpen, type, data, relatedData) =>
+    <AssignmentForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />,
 
   student: (setOpen, type, data, relatedData) =>
     <StudentForm
@@ -119,8 +128,6 @@ const forms: {
       setOpen={setOpen}
       relatedData={relatedData}
     />
-
-
     // TODO OTHER LIST ITEMS
   ),
 
@@ -155,13 +162,13 @@ const forms: {
       relatedData={relatedData}
 
     />,
-    ppdb: (setOpen, type, data, relatedData) =>
-      <PPDBForm
-        type={type}
-        data={data}
-        setOpen={setOpen}
-        relatedData={relatedData}  
-      />,
+  ppdb: (setOpen, type, data, relatedData) =>
+    <PPDBForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />,
   //...more form components for other tables...
 }
 
