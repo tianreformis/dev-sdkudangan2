@@ -1,11 +1,13 @@
+"use client"
+
 import Image from "next/image";
 import React from "react";
 
 
-const Component = () => {
+const BlogPage = () => {
   return (
     <div className="">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onClick={() => window.location.href = '/blog/1'}>
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Artikel Terbaru</h1>
         <div className="relative">
           <Image 
@@ -50,7 +52,7 @@ const Component = () => {
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Artikel Lainnya</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         {/* Artikel 1 */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onClick={() => window.location.href = '/blog/2'}>
           <Image
             width={500}
             height={300} 
@@ -80,7 +82,7 @@ const Component = () => {
         </div>
 
         {/* Artikel 2 */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onClick={() => window.location.href = '/blog/3'}>
           <Image
             width={500}
             height={300}
@@ -110,7 +112,7 @@ const Component = () => {
         </div>
 
         {/* Artikel 3 */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onClick={() => window.location.href = '/blog/4'}>
           <Image
             width={500}
             height={300}
@@ -147,4 +149,4 @@ const Component = () => {
 }
 
 
-export default Component;
+export default BlogPage;
