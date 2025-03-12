@@ -57,3 +57,5 @@ orang tua dapat melihat profil sendiri dan menggantinya jika diperlukan
 
 Kiranya menolong supaya sistem ini memudahkan admin, guru, orang tua dan murid
 berharap kedepannya tidak ada orang tua, murid ataupun guru yang ketinggalan informasi
+
+#Tambahkan data
